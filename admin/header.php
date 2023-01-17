@@ -1,6 +1,8 @@
 <?php
 session_start();
 (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') && header("location: index.php");
+$pageName = basename($_SERVER['PHP_SELF']);
+$conn = mysqli_connect("localhost", "root", "", "evaly");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,4 +22,24 @@ session_start();
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        .dataTables_wrapper {
+            width: 98%;
+        }
+    </style>
 </head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <?php
+        include_once("./sidebar.php");
+        ?>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">

@@ -40,7 +40,7 @@
     </div>
 </div>
 <!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
+
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
@@ -48,6 +48,15 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor5/35.4.0/ckeditor.min.js" integrity="sha512-ZQuCYIBUYo0YSpka4/IcRd/4CiBh2LhXdxf/raBrLd+o3yquriJGfWE6JzUPk1KO0aJZn+b8987maU8Anrr10w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 </body>
 
 </html>

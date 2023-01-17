@@ -35,7 +35,7 @@ include_once("./navbar.php");
         $fname = $_FILES['ppimg']['name'];
         $tmp_fname = $_FILES['ppimg']['tmp_name'];
 
-        $newImgName = date("FdYHisa") . uniqid() . rand(1000, 9999) . "." . pathinfo($fname, PATHINFO_EXTENSION);
+        $newImgName = date("FdYHisa") . uniqid() . random_int(1000, 9999) . "." . pathinfo($fname, PATHINFO_EXTENSION);
         $destination = "./images/$newImgName";
         $move = move_uploaded_file($tmp_fname, $destination);
         if (!$move) {

@@ -14,10 +14,10 @@
                 </li>
                 <?php if (!isset($_SESSION['name'])) { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="./signin.php">Sign in</a>
+                        <a class="nav-link <?= $page == 'signin.php' ? 'active' : null ?>" href="./signin.php">Sign in</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./signup.php">Sign Up</a>
+                        <a class="nav-link <?= $page == 'signup.php' ? 'active' : null ?>" href="./signup.php">Sign Up</a>
                     </li>
                 <?php } else { ?>
                     <li class="nav-item dropdown">
@@ -42,7 +42,18 @@
                             <?php } ?>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a href="./orders.php" class="nav-link <?= $page == 'orders.php' ? 'active' : null ?>">My Orders</a>
+                    </li>
                 <?php } ?>
+                <li class="nav-item">
+                    <a class="nav-link position-relative me-5" href="./cart.php">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill bg-danger" id="cartnav">
+                            0
+                        </span>
+                    </a>
+                </li>
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
