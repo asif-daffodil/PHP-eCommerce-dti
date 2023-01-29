@@ -2,31 +2,46 @@
 include_once("./header.php");
 include_once("./navbar.php");
 !isset($_SESSION['name']) && header("location: ./");
+function updateData ($crrEmail, $crrName, $conn, $preEmail) {
+    if (isset($crrEmail) && isset($crrName)) {
+        $check = $conn->query("SELECT * FROM `users` WHERE `email` = '$preEmail'");
+        $c = $check->fetch_object();
+        $id = $c->id;
+        $crrEmail = $conn->real_escape_string($crrEmail);
+        $crrName = $conn->real_escape_string($crrName);
+        $updateUser = $conn->query("UPDATE `users` SET `email` = '$crrEmail', `name` = '$crrName' WHERE `id` = $id");
+
+        if ($updateUser) {
+            echo "<script>toastr.success('User updated');</script>";
+            $_SESSION['name'] = $crrName;
+            $_SESSION['email'] = $crrEmail;
+        }
+    }
+}
 ?>
 <div class="container">
     <?php
-    $preEmail = $_SESSION['email'];
     if (isset($_POST['pu123'])) {
         $puemail = $_POST['puemail'];
         $puname = $_POST['puname'];
-        if ($preEmail != $puemail) {
-            $check = $conn->query("SELECT * FROM users WHERE email = '$puemail'");
-            if ($check->num_rows > 0) {
-                echo "<script>toastr.error('Email already exists');</script>";
-            } else {
+        $preEmail = $_SESSION['email'];
+        $preName = $_SESSION['name'];
+        if ($preEmail === $puemail && $preName === $puname) {
+                echo "<script>toastr.error('Please provide a new data');</script>";
+        }else {
+            if($preEmail !== $puemail){
+                $check = $conn->query("SELECT * FROM `users` WHERE `email` = '$puemail'");
+                if ($check->num_rows > 0) {
+                    echo "<script>toastr.error('Email already exicts');</script>";
+                }else{
+                    $crrEmail = $puemail;
+                    $crrName = $puname;
+                    updateData ($crrEmail, $crrName, $conn, $preEmail);
+                }
+            }else{
                 $crrEmail = $puemail;
-            }
-        } else {
-            $crrEmail = $puemail;
-        }
-
-        if (isset($crrEmail)) {
-            $updateUser = $conn->query("UPDATE users SET email = '$puemail' AND name = '$puname' WHERE email = '$preEmail'");
-
-            if ($updateUser) {
-                echo "<script>toastr.success('User updated');</script>";
-                $_SESSION['name'] = $puname;
-                $_SESSION['email'] = $puemail;
+                $crrName = $puname;
+                updateData ($crrEmail, $crrName, $conn, $preEmail);
             }
         }
     }
@@ -41,11 +56,12 @@ include_once("./navbar.php");
         if (!$move) {
             echo "<script>toastr.error('Image upload problem');</script>";
         } else {
+            $preEmail = $_SESSION['email'];
             $upImg = $conn->query("UPDATE users SET img = '$newImgName' WHERE email = '$preEmail'");
             if (!$upImg) {
                 echo "<script>toastr.error('Database problem');</script>";
             } else {
-                if (isset($_SESSION['img'])) {
+                if ($_SESSION['img'] != "") {
                     $img = $_SESSION['img'];
                     unlink("./images/$img");
                 }
@@ -74,7 +90,7 @@ include_once("./navbar.php");
             <div class="p-4 border rounded shadow">
                 <form action="" method="post" enctype="multipart/form-data" id="imgForm">
                     <label for="ppimg" class="text-center">
-                        <img src='./images/<?= $_SESSION['img'] ?? "profile.png " ?>' alt="" class="img-fluid"><br>
+                        <img src='./images/<?= (!isset($_SESSION['img']) || $_SESSION['img'] == "") ? "profile.png":$_SESSION['img'] ?>' alt="" class="img-fluid"><br>
                         Click on image to upload/Change
                     </label>
                     <input type="file" id="ppimg" class="d-none" accept="image/*" name="ppimg">

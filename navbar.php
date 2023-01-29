@@ -22,7 +22,7 @@
                 <?php } else { ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src='./images/<?= $_SESSION['img'] ?? "profile.png " ?>' alt="" class="img-fluid rounded-circle" style="height: 20px;">
+                            <img src='./images/<?= (!isset($_SESSION['img']) || $_SESSION['img'] == "") ? "profile.png":$_SESSION['img'] ?>' alt="" class="img-fluid rounded-circle" style="height: 20px;">
                             <?= explode(" ", $_SESSION['name'])[0]  ?>
                         </a>
                         <ul class="dropdown-menu">
