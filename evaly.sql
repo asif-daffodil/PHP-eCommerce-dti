@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2023 at 02:21 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: May 30, 2023 at 08:57 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,7 +38,7 @@ CREATE TABLE `orders` (
   `status` char(10) NOT NULL DEFAULT 'pending',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `orders`
@@ -68,7 +68,7 @@ CREATE TABLE `products` (
   `description` longtext NOT NULL,
   `img` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
@@ -102,16 +102,17 @@ CREATE TABLE `users` (
   `role` char(20) NOT NULL DEFAULT 'user',
   `img` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `pass`, `role`, `img`, `created_at`) VALUES
-(1, 'Ali Haydar', 'haydar@dti.ac', 'e10adc3949ba59abbe56e057f20f883e', 'user', 'December272022120302pm63aad0e6c300b3749.jpg', '2022-12-13 09:50:21'),
-(2, 'Asif Abir', 'asif@dti.ac', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'December272022120154pm63aad0a25591f4754.jpg', '2022-12-13 09:53:15'),
-(3, 'Mohsin', 'mohsin@dti.ac', 'e10adc3949ba59abbe56e057f20f883e', 'user', '', '2022-12-13 10:58:18');
+(1, 'Ali Haydar', '01712121212', 'e10adc3949ba59abbe56e057f20f883e', 'user', 'December272022120302pm63aad0e6c300b3749.jpg', '2022-12-13 09:50:21'),
+(2, 'Asif Abir', '01955517560', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'May262023164351pm6470c5a7c54f56484.jpg', '2022-12-13 09:53:15'),
+(3, 'Mohsin', '01811223344', 'e10adc3949ba59abbe56e057f20f883e', 'user', '', '2022-12-13 10:58:18'),
+(4, 'Rakib Molla', '01122334455', 'e10adc3949ba59abbe56e057f20f883e', 'user', 'May302023201421pm64763cfd1679e1863.jpg', '2023-05-30 18:13:10');
 
 --
 -- Indexes for dumped tables
@@ -157,7 +158,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
