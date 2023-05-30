@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "evaly");
+include_once("./db.php");
 $data = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_POST = json_decode(file_get_contents("php://input"), true);

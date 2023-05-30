@@ -2,7 +2,7 @@
 session_start();
 (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') && header("location: index.php");
 $pageName = basename($_SERVER['PHP_SELF']);
-$conn = mysqli_connect("localhost", "root", "", "evaly");
+include_once("../db.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

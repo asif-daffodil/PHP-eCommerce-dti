@@ -13,7 +13,7 @@ isset($_SESSION['name']) && header("location: ./");
         $checkEmail = $conn->query("SELECT * FROM users WHERE email = '$suemail'");
 
         if ($checkEmail->num_rows > 0) {
-            echo "<script>toastr.error('Email Already exists')</script>";
+            echo "<script>toastr.error('Mobile number already exists')</script>";
         } else {
             $supass = md5($supass);
             $insert = $conn->query("INSERT INTO `users` (`name`, `email`, `pass`) VALUES ('$suname', '$suemail', '$supass')");
@@ -31,7 +31,7 @@ isset($_SESSION['name']) && header("location: ./");
                     <input type="text" placeholder="Name" name="suname" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <input type="email" placeholder="Email Address" name="suemail" class="form-control" required>
+                    <input type="number" placeholder="Mobile Number" name="suemail" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <input type="password" placeholder="Password" name="supass" class="form-control" required minlength="6">

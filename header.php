@@ -1,6 +1,6 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "evaly");
+include_once("./db.php");
 $page = basename($_SERVER['PHP_SELF']);
 ?>
 <!doctype html>
