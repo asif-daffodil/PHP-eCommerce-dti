@@ -21,7 +21,11 @@ class signInClass extends dbConnect
             $check = dbConnect::$conn->query("SELECT * FROM users WHERE email = '$siemail' AND pass = '$sipass'");
             if ($check->num_rows == 1) {
                 $data = $check->fetch_object();
-                echo "<script>toastr.success('Sign-in Successful');setTimeout(()=>location.href= './auth.php?token=123321&name=" . $data->name . "&email=" . $data->email . "&role=" . $data->role . "&img=" . $data->img . "', 2000)</script>";
+                $_SESSION['name'] = $data->name;
+                $_SESSION['email'] = $data->email;
+                $_SESSION['role'] = $data->role ?? 'user';
+                $_SESSION['img'] = $data->img ?? null;
+                echo "<script>toastr.success('Sign-in Successful');setTimeout(()=>location.href= './', 2000)</script>";
             } else {
                 $data = $check->fetch_object();
                 echo "<script>toastr.error('Username or password error');</script>";

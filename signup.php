@@ -18,7 +18,11 @@ isset($_SESSION['name']) && header("location: ./");
             $supass = md5($supass);
             $insert = $conn->query("INSERT INTO `users` (`name`, `email`, `pass`) VALUES ('$suname', '$suemail', '$supass')");
             if ($insert) {
-                echo "<script>toastr.success('Registration Successful');setTimeout(()=>location.href= './auth.php?token=123321&name=" . $suname . "&email=" . $suemail . "', 2000)</script>";
+                $_SESSION['name'] = $suname;
+                $_SESSION['email'] = $suemail;
+                $_SESSION['role'] = 'user';
+                $_SESSION['img'] =  null;
+                echo "<script>toastr.success('Registration Successful');setTimeout(()=>location.href= './', 2000)</script>";
             }
         }
     }
